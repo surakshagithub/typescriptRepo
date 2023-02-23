@@ -1,6 +1,7 @@
-import React , {useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, gql } from "@apollo/client";
 import Table from './Table';
+import { CountriesInterface } from '../Interfaces/CountriesInterface';
 const Country_Query = gql`
   {
     countries{
@@ -15,42 +16,32 @@ const Country_Query = gql`
   }
 `;
 
-interface stateType{
- <Array> [ {
-    name:string,
-    capital:string,
-    currency:string,
-    continent:{
-      name:string,
+const Fetchdata = () => {
+  const [countries, setCountries] = useState<CountriesInterface[] | []>([])
+
+  const { data, loading, error } = useQuery(Country_Query);
+
+  console.log(data);
+  useEffect(() => {
+    if (data) {
+      setCountries(data.countries);
     }
-  }]
-}
+  }, [data]);
 
-const Fetchdata=()=>{
-    const [countries, setCountries] = useState<stateType | []>([])
+  if (loading) return <h1>Loading Please wait</h1>
 
-    const { data, fetching, error } = useQuery(Country_Query);
-    console.log(data);
-    useEffect(() => {
-      if (data) {
-        setCountries(data.countries);
-      }
-    }, [data]);
-  
-    if (fetching) return <h1>Loading Please wait</h1>
-    
-    if (error)
-      return (
-        <h2>
-          <pre>{error.message}</pre>
-        </h2>
-      );
-    return(
-        <>
-         <Table countries={countries}/>
-         {/* <Table/> */}
-        </>
-    )
+  if (error)
+    return (
+      <h2>
+        <pre>{error.message}</pre>
+      </h2>
+    );
+  return (
+    <>
+      <Table countries={countries} />
+      {/* <Table/> */}
+    </>
+  )
 }
 
 
