@@ -1,12 +1,13 @@
 import React from 'react';
+import { Container,Box } from '@chakra-ui/react'
 const Random = () => {
     return (
         <>
-            <h1>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptatibus lab
-                ore voluptatum aut ex harum iure totam minima molestias consequatur dolorem, neque
-                veniam doloremque aliquid animi provident aliquam? Et, magnam.
-            </h1>
+           <Container bg='hotpink' centerContent maxW='6xl'>
+  <Box padding='4' color='black' maxW='4xl' >
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis similique enim reiciendis. Illo mollitia expedita placeat delectus rem temporibus quod? Eligendi dolores nesciunt consequatur pariatur asperiores recusandae amet, repudiandae dolorem!
+  </Box>
+</Container>
         </>
     )
 }

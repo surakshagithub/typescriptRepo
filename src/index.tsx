@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { ChakraProvider } from '@chakra-ui/react'
+
 
 const client = new ApolloClient({
   uri: "https://countries.trevorblades.com/graphql",
@@ -14,9 +16,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <ChakraProvider>
     <ApolloProvider client={client}>
     <App />
-    </ApolloProvider>,
+    </ApolloProvider>
+    </ChakraProvider>
 
   </React.StrictMode>
 );
