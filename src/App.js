@@ -8,6 +8,7 @@ import Navbar from './Components/Navbar';
 import Home from './Components/Home';
 import Random from './Components/Random';
 import Navbar1 from './Components/Navbar1';
+import Newform from './Components/Newform';
 
 
 
