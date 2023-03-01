@@ -4,7 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from 'react-query'
+const queryClient = new QueryClient();
+
+
 
 
 const client = new ApolloClient({
@@ -16,11 +20,16 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+            <QueryClientProvider client={queryClient}>
+
     <ChakraProvider>
     <ApolloProvider client={client}>
     <App />
     </ApolloProvider>
     </ChakraProvider>
+    </QueryClientProvider>
+
+    
 
   </React.StrictMode>
 );

@@ -36,7 +36,16 @@ import { CountriesInterface } from '../Interfaces/CountriesInterface';
   // }
   let rowSelectionType="multiple";
   
-  
+  const generateContextMenu=()=>{
+    const menuItems=[];
+    menuItems.push({
+      name:'view',
+      action:()=>{
+        console.log("hyy")
+      }
+    })
+    return menuItems;
+  }
   return (
     <>
     {/* <button onClick={()=>onExportClick}>Export</button> */}
@@ -49,6 +58,8 @@ import { CountriesInterface } from '../Interfaces/CountriesInterface';
         enableBrowserTooltips={true}
         rowSelection={rowSelectionType}
         tooltipShowDelay={{tooltipShowDelay:2}}
+        getContextMenuItems={generateContextMenu}
+        allowContextMenuWithControlKey={true}
         >
           
       </AgGridReact>
