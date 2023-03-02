@@ -1,34 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Heading } from "@chakra-ui/react";
 import {
-  Center,
   Stack,
   Input,
   Container,
   Button,
   Text,
   Flex,
-  List,
   ListItem,
-  ListIcon,
-  OrderedList,
   UnorderedList,
-  Spacer,
 } from "@chakra-ui/react";
-import { Form, Formik, ErrorMessage, Field } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { useQuery ,useMutation, useQueryClient } from "react-query";
-
+import { useQuery, useMutation, useQueryClient } from "react-query";
+// import {getData} from '../api'
 
 const Home = () => {
   const queryClient = useQueryClient();
   const [products, setProducts] = useState([]);
-  const [inputValue, setInputValue] = useState();
+  const [setInputValue] = useState();
 
   var { isLoading, error, data } = useQuery("repoData", () =>
-    fetch("https://dummyjson.com/products").then((res) =>
-      res.json()
-    )
+    fetch("https://dummyjson.com/products").then((res) => res.json())
   );
 
   useEffect(() => {
@@ -36,8 +29,6 @@ const Home = () => {
       setProducts(data.products);
     }
   }, [data]);
-
-
 
   const initialValues = {
     title: "title",
@@ -49,40 +40,34 @@ const Home = () => {
     category: "phone",
     thumbnail: "fdfsd",
   };
-  const addNewProduct = async(inputValue)=>{
-    const response= await fetch("https://dummyjson.com/products/add", {
+  const addNewProduct = async (inputValue) => {
+    const response = await fetch("https://dummyjson.com/products/add", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(inputValue),
-    })
+    });
 
     return response;
-
-  }
-
+  };
 
   var { mutate, isLoading } = useMutation(addNewProduct, {
-    onSuccess: data => {
+    onSuccess: (data) => {
       console.log(data);
-      const message = "success"
-      alert(message)
+      const message = "success";
+      alert(message);
     },
     onError: () => {
-      alert("there was an error")
+      alert("there was an error");
     },
     onSettled: () => {
-      queryClient.invalidateQueries('create');
-    }
+      queryClient.invalidateQueries("create");
+    },
   });
 
-  
-
-
-  const onSubmit =(values)=> {
+  const onSubmit = (values) => {
     console.log(values);
-    
 
     setInputValue(values);
     // console.log(inputValue)
@@ -92,7 +77,6 @@ const Home = () => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
   });
-
 
   if (isLoading) return "Loading...";
 
@@ -138,9 +122,9 @@ const Home = () => {
                     onChange={props.handleChange}
                   />
 
-                  
-
-                  <label htmlFor="discountPercentage">Enter discountPercentage:</label>
+                  <label htmlFor="discountPercentage">
+                    Enter discountPercentage:
+                  </label>
                   <Input
                     type="number"
                     placeholder=""
@@ -206,7 +190,7 @@ const Home = () => {
                     onChange={props.handleChange}
                   />
 
-                  <Button colorScheme="blue" type="submit" >
+                  <Button colorScheme="blue" type="submit">
                     Submit
                   </Button>
                 </Form>
